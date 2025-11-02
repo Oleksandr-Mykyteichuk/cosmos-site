@@ -1,0 +1,14 @@
+@mixin planet-base($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+  position: relative;
+  filter: brightness(1.08) contrast(1.1);
+  will-change: transform, background-position, filter;
+}
+@mixin parallax($factor) {
+  transform: translateY(calc(var(--scroll) * #{$factor}));
+  transition: transform 0.05s linear;
+}

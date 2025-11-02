@@ -1,0 +1,172 @@
+.planet {
+  @include planet-base(var(--size));
+  background-image: var(--img);
+  transform-style: preserve-3d;
+  pointer-events: none;
+  will-change: transform;
+  position: relative;
+
+  &.spin {
+    animation: rotate 40s linear infinite;
+    background-repeat: repeat-x;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(120% 120% at 30% 30%, rgba(255, 255, 255, .45), transparent 60%),
+      radial-gradient(120% 120% at 70% 70%, rgba(0, 0, 0, .35), transparent 60%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image: url("/assets/noise-512.png");
+    opacity: .06;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}
+
+.rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--size) * 1.8);
+  height: calc(var(--size) * 0.5);
+  transform: translate(-50%, -50%) rotateX(70deg);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.097) 0%,
+      rgba(255, 255, 255, 0.479) 35%,
+      rgba(236, 219, 153, 0.149) 70%,
+      transparent 100%);
+  pointer-events: none;
+}
+
+@keyframes ring-spin {
+  from {
+    transform: translate(-50%, -50%) rotateX(70deg) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotateX(70deg) rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes clouds-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.planet {
+  @include parallax(-0.15);
+}
+
+.planet--sun {
+  filter: brightness(1.3) saturate(1.4);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 200, 80, .7), transparent 70%);
+    animation: sun-pulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 180, 0, .25), transparent 75%);
+    filter: blur(40px);
+    animation: solar-flare 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes sun-pulse {
+
+  0%,
+  100% {
+    opacity: .4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes solar-flare {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: .25;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: .5;
+  }
+}
+
+.planet-scroll-wrap {
+  display: inline-block;
+  perspective: 1200px;
+  will-change: transform, opacity;
+
+  view-timeline-name: --planet-scroll;
+  view-timeline-axis: block;
+
+  animation: planet-pop linear both;
+  animation-timeline: --planet-scroll;
+  animation-range: entry 0% cover 100%, cover 30% cover 60%, cover 60% exit 10%;
+}
+
+@keyframes planet-pop {
+  0% {
+    transform: translate3d(0, 40vh, -300px) scale(0.4);
+    opacity: 0;
+  }
+
+  30% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(50vw, -40vh, -200px) scale(0.35);
+    opacity: 0;
+  }
+}

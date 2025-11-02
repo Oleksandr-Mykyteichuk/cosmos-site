@@ -1,0 +1,123 @@
+html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+}
+
+#scroll-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.content-top {
+  position: relative;
+  z-index: 10;
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+  font-size: 26px;
+  background: rgba(181, 144, 144, 0.153);
+  color: white;
+  border: 1px solid white;
+  border-radius: 50px;
+  padding: 8px 12px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.sidebar {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 150;
+  background: rgba(204, 204, 164, 0.196);
+  border: 1px solid rgba(90, 173, 80, 0.447);
+  padding: 12px;
+  border-radius: 25px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.nav_button {
+  background: rgba(187, 184, 75, 0.497);
+  border: 1px solid rgba(70, 59, 229, 0.595);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  z-index: 2000;
+}
+
+.modal-body {
+    color: rgba(61, 220, 212, 0.9);
+  background: rgba(34, 34, 49, 0.9);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  padding: 20px 26px;
+  width: 320px;
+  text-align: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-planet-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px cyan;
+  margin-bottom: 10px;
+}
+
